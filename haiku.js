@@ -33,18 +33,6 @@ function readCmudictFile(file){
 }
 
 function formatData(data){    
-   var lines = data.toString().split("\n"),
-       lineSplit
-   lines.forEach(function(line){    
-    lineSplit = line.split("  ");    
-    console.log("The word " + lineSplit[0] + " has this phoneme    layout: " + lineSplit[1]); 
-
-  });   
-}
-
-
-
-function formatData(data){    
   var lines = data.toString().split("\n"),
       syllablesArrDict = [[],[],[],[],[],[],[]],
       lineSplit,
