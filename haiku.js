@@ -1,12 +1,12 @@
 var fs = require('fs');
 var cmudictFile = readCmudictFile('./cmudict.txt');
 
-function createHaiku(){
-    var formattedDict = formatData(cmudictFile);
-    var output = "";
-    var structure = [[2,2,1],[2,3,2],[1,1,2,1]];
-    var randomWord;
+function createHaiku(structure){
+    var formattedDict = formatData(cmudictFile),
+        output = "Haiku:",
+        randomWord;
     structure.forEach(function(lineStruct){
+      output += "\n";
       lineStruct.forEach(function(num){
         randomWord = chooseRandomWord(formattedDict,(num-1));
         if (randomWord.match(/\(\d\)/)){
@@ -14,9 +14,8 @@ function createHaiku(){
         }
         output += randomWord+" ";
       });
-      output += "\n";
   })
-  console.log(output);
+  return output;
 }
 
 function chooseRandomWord(syllablesArrDict, num){
