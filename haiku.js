@@ -25,6 +25,7 @@ function chooseRandomWord(syllablesArrDict, num){
 
 module.exports = {
   createHaiku: createHaiku,
+  formatData: formatData
 };
 
 function readCmudictFile(file){
