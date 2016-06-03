@@ -1,13 +1,19 @@
 var fs = require('fs');
-var cmudictFile = readTextFile('./cmudict.txt');
 var haiku = require('./haiku');
+
+var cmudictFile = readTextFile('./cmudict.txt');
+var syllablesArrDict = haiku.formatData(cmudictFile);
 
 function readTextFile(file){
   return fs.readFileSync(file).toString();
 }
 
+
 var wordSyllableCount = function(word){
-  syllablesArrDict = haiku.formatData(cmudictFile);
+  //deal with 's (remove for the word match since it doesn't affect num of syllables)
+  if (/\'s$/.test(word)){
+    word = word.slice(0,-2);
+  }
   for (var i =0; i<syllablesArrDict.length;i++){
     if (syllablesArrDict[i].indexOf(word.toUpperCase())>(-1)){
       return i+1;
@@ -17,7 +23,8 @@ var wordSyllableCount = function(word){
 }
 
 function formatBook(book){
-  var formattedBook = book.replace(/\W+/ig, " ");
+  //leaves in apostrophe's and hyphens
+  var formattedBook = book.replace(/[^(\')|\w|-]/g, " ");
   return formattedBook.split(" ");
 }
 
